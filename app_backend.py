@@ -9,4 +9,4 @@ def crystal_audio():
     return send_file("static/audio/crystal_intro.mp3")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=9091)
