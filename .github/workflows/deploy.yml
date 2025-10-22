@@ -1,0 +1,26 @@
+name: Deploy CoreRouter to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: 31.97.193.13
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script:
+          cd /home/ubuntu/blaxing_agents/core_router && \
+          git pull origin main && \
+          sudo systemctl restart manus-orchestrator.service
+
